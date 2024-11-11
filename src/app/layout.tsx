@@ -7,7 +7,7 @@ import QuickContact from '@/components/layouts/quickcontact';
 
 export const viewport = { width: 'device-width', initialScale: 1 } satisfies Viewport;
 
-import { Noto_Sans_Thai } from '@next/font/google';
+import { Noto_Sans_Thai } from 'next/font/google';
 
 const notoSansThai = Noto_Sans_Thai({
   subsets: ['thai'],
