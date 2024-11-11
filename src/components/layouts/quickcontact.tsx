@@ -1,5 +1,5 @@
 // components/QuickContact.tsx
-
+'use client';
 import React from 'react';
 import { Box, IconButton } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -30,6 +30,10 @@ const QuickContact: React.FC = () => {
               transform: 'scale(1.2)', // Enlarge the icon inside
             },
           },
+        }}
+        onClick={() => {
+          // open line new tab
+          window.open('https://line.me/ti/p/%2B6612345678', '_blank');
         }}
       >
         <FaLine fontSize="40px" color="green" />
