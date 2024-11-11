@@ -1,12 +1,11 @@
-// next.config.js
-module.exports = {
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/home',
-        permanent: true, // Set to false if you want a temporary redirect
-      },
-    ];
-  },
-};
+// @ts-check
+ 
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  /* config options here */
+  output: 'standalone',
+}
+ 
+export default nextConfig
