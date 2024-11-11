@@ -4,18 +4,32 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ffffff;
+  --slide-speed: 0.5s;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+/* Initial hidden state */
+.hide {
+  opacity: 0;
+  transform: translateY(50px);
+  /* Adjust this for slide distance */
+  transition: opacity var(--slide-speed) ease, transform var(--slide-speed) ease;
+}
+
+/* Show class with gradual opacity increase and slide-up effect */
+.show {
+  opacity: 1;
+  transform: translateY(0);
 }
