@@ -18,12 +18,16 @@ const HomePage: React.FC = () => {
     const contactRef = useRef<HTMLDivElement | null>(null); // Ref for Contact section
 
 
+    const [isLanguageLoaded, setIsLanguageLoaded] = useState<boolean>(false);
     useEffect(() => {
-        const storedLanguage = localStorage.getItem('selectedLanguage') as string;
-        if (storedLanguage) {
-            setLanguage(storedLanguage);
+        if (typeof window !== "undefined") { // Check if running in the browser
+            const storedLanguage = localStorage.getItem('selectedLanguage');
+            if (storedLanguage) {
+                setLanguage(storedLanguage);
+            }
+            setIsLanguageLoaded(true); // Set to true after retrieving language
         }
-    }, []);
+    }, []); // Run once after component mounts
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -80,11 +84,12 @@ const HomePage: React.FC = () => {
     const texts = locales[language];
 
     return (
-        <div>
+        <div style={{display: isLanguageLoaded ? 'block' : 'none'}}>
             {/* Hero Section */}
             <Box
                 ref={imageRef}
                 sx={{
+    
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',

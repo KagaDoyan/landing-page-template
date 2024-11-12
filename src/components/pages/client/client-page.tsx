@@ -6,15 +6,23 @@ import { Box, Container, Typography, Grid } from '@mui/material';
 
 const ClientsPage: React.FC = () => {
     const [language, setLanguage] = useState<string>('eng');
+    const [isLanguageLoaded, setIsLanguageLoaded] = useState<boolean>(false);
     useEffect(() => {
-        const storedLanguage = localStorage.getItem('selectedLanguage') as string;
-        if (storedLanguage) {
-            setLanguage(storedLanguage);
+        if (typeof window !== "undefined") { // Check if running in the browser
+            const storedLanguage = localStorage.getItem('selectedLanguage');
+            if (storedLanguage) {
+                setLanguage(storedLanguage);
+            }
+            setIsLanguageLoaded(true); // Set to true after retrieving language
         }
-    })
+    }, []); // Run once after component mounts
+
 
     const content = clientData[language]; // Get content based on selected language
     const [isImageLoaded, setIsImageLoaded] = React.useState(true);
+    if (!isLanguageLoaded) {
+        return <></>; // Render nothing if language is not loaded
+    }
 
     return (
         <Box>

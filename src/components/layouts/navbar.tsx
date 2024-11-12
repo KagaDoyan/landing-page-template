@@ -20,6 +20,7 @@ import { useState, useEffect } from "react";
 import { navItemsByLanguage } from "@/components/nav-tem";
 import { Language } from "@mui/icons-material";
 import { Noto_Sans_Thai } from '@next/font/google';
+import getInitialLanguage from "../utilities/LanguageSelected";
 
 const notoSansThai = Noto_Sans_Thai({
     subsets: ['thai'],
@@ -39,7 +40,7 @@ const LanguageOption = [
 
 const navItems: Record<string, NavItem[]> = navItemsByLanguage;
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = ({}) => {
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -52,11 +53,18 @@ const Navbar: React.FC = () => {
     var DefaultColor = "white";
     const [defaultTextColor, setDefaultTextColor] = useState<string>(DefaultColor); // Default text color
 
+    const [isLanguageLoaded, setIsLanguageLoaded] = useState<boolean>(false);
+    useEffect(() => {
+        if (typeof window !== "undefined") { // Check if running in the browser
+            const storedLanguage = localStorage.getItem('selectedLanguage');
+            if (storedLanguage) {
+                setCurrentLanguage(storedLanguage);
+            }
+            setIsLanguageLoaded(true); // Set to true after retrieving language
+        }
+    }, []); // Run once after component mounts
 
     useEffect(() => {
-        const savedLanguage = localStorage.getItem("selectedLanguage") || "eng";
-        setCurrentLanguage(savedLanguage);
-
         const handleScroll = () => {
             setAppBarBgColor(window.scrollY > 50 ? "rgb(255, 255, 255)" : "transparent");
             setDefaultTextColor(window.scrollY > 50 ? MemuColor : DefaultColor);
@@ -65,6 +73,8 @@ const Navbar: React.FC = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    if (!isLanguageLoaded) return null;
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (event.type === "keydown" && ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift")) {

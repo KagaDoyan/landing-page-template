@@ -8,13 +8,20 @@ import { FooterData } from '@/components/footer-data'; // Import the footer data
 const Footer: React.FC = () => {
     const [language,setlanguage] = useState<string>('eng');
     const footerContent = FooterData[language]; // Get content based on selected language
-
+    const [isLanguageLoaded, setIsLanguageLoaded] = useState<boolean>(false);
     useEffect(() => {
-        const storedLanguage = localStorage.getItem('selectedLanguage');
-        if (storedLanguage) {
-            setlanguage(storedLanguage);
+        if (typeof window !== "undefined") { // Check if running in the browser
+            const storedLanguage = localStorage.getItem('selectedLanguage');
+            if (storedLanguage) {
+                setlanguage(storedLanguage);
+            }
+            setIsLanguageLoaded(true); // Set to true after retrieving language
         }
-    })
+    }, []); // Run once after component mounts
+
+    if (!isLanguageLoaded) {
+        return null; // Render nothing if language is not loaded
+    }
     return (
         <Box
             sx={{
