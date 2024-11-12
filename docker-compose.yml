@@ -2,11 +2,9 @@ version: '3'
 
 services:
   nextjs-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: landingpage
     ports:
-      - "3080:80"   # Map port 3080 on host to 3080 in the container
+      - "3080:80"   # Map port 3080 on host to 80 in the container
     environment:
       - NODE_ENV=production
     restart: always
