@@ -1,7 +1,9 @@
-import ContactPage from "@/components/contact/contact-page";
+import ContactPage from "@/components/pages/contact/contact-page";
 
-export default function Home() {
+export default function Page(): React.JSX.Element {
   return (
-    <ContactPage />
+    <div>
+      <ContactPage />
+    </div>
   );
 }

@@ -17,7 +17,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { useState, useEffect } from "react";
-import { navItemsByLanguage } from "@/nav-tem";
+import { navItemsByLanguage } from "@/components/nav-tem";
 import { Language } from "@mui/icons-material";
 import { Noto_Sans_Thai } from '@next/font/google';
 
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-    const [currentLanguage, setCurrentLanguage] = useState<string>(localStorage.getItem("selectedLanguage") || "eng");
+    const [currentLanguage, setCurrentLanguage] = useState<string>("eng");
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [appBarBgColor, setAppBarBgColor] = useState<string>("transparent");
 
@@ -179,7 +179,7 @@ const Navbar: React.FC = () => {
                                             },
                                         }}
                                     >
-                                        <p>{item.title}</p>
+                                        <h5>{item.title}</h5>
                                     </ListItemButton>
                                 </ListItem>
                             ))}

@@ -1,11 +1,16 @@
 "use client";
-import React from 'react';
-import { Box, Container, Typography, List, ListItem, Grid, Button } from '@mui/material';
-import { ServicesData } from '@/service-data'; // Import your language data file
-import { orange } from '@mui/material/colors';
+import React, { useEffect, useState } from 'react';
+import { Box, Container, Typography, List, ListItem, Grid } from '@mui/material';
+import { ServicesData } from '@/components/service-data'; // Import your language data file
 
-const ServicesPage: React.FC = () => {
-    const language = localStorage.getItem('selectedLanguage') || 'eng';
+function ServicesPage(): React.JSX.Element {
+    const [language, setLanguage] = useState<string>('eng');
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('selectedLanguage') as string;
+        if (storedLanguage) {
+            setLanguage(storedLanguage);
+        }
+    })
     const services = ServicesData[language]; // Access the services based on selected language
     const [isImageLoaded, setIsImageLoaded] = React.useState(true);
 

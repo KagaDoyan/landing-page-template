@@ -1,7 +1,9 @@
 import ServicesPage from "@/components/services/service-page";
 
-export default function Home() {
+export default function Page(): React.JSX.Element {
   return (
-    <ServicesPage />
+    <div>
+      <ServicesPage />
+    </div>
   );
 }

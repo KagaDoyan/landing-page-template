@@ -1,12 +1,11 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import { Container, Box, Button, Grid, Paper, TextField, Accordion, AccordionSummary, AccordionDetails, Card, CardContent, Divider } from '@mui/material';
-import locales from '@/home-data';
+import { Box, Button, Grid, Paper, AccordionSummary, AccordionDetails, Card, Divider, Accordion } from '@mui/material';
+import locales from '@/components/home-data';
 import { ExpandMore } from '@mui/icons-material';
-import { text } from 'stream/consumers';
 
 const HomePage: React.FC = () => {
-    const [language, setLanguage] = useState<string>(localStorage.getItem('selectedLanguage') || 'eng'); // Default language
+    const [language, setLanguage] = useState<string>('eng'); // Default language
     const [isImageLoaded, setIsImageLoaded] = useState(true);
     const imageRef = useRef<HTMLDivElement | null>(null);
     const [isAboutVisible, setIsAboutVisible] = useState(false);

@@ -1,7 +1,9 @@
-import ClientsPage from "@/components/client/client-page";
+import ClientsPage from "@/components/pages/client/client-page";
 
-export default function Clients() {
+export default function Page(): React.JSX.Element {
     return (
-        <ClientsPage />
+        <div>
+            <ClientsPage />
+        </div>
     )
 }

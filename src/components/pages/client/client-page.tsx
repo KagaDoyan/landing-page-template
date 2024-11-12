@@ -1,16 +1,23 @@
 // ClientsPage.tsx
 "use client";
-import React from 'react';
-import { clientData } from '@/client-data'; // Adjust the import path as needed
+import React, { useEffect, useState } from 'react';
+import { clientData } from '@/components/client-data'; // Adjust the import path as needed
 import { Box, Container, Typography, Grid } from '@mui/material';
 
 const ClientsPage: React.FC = () => {
-    const language = localStorage.getItem('selectedLanguage') || 'en'; // Default to English
+    const [language, setLanguage] = useState<string>('eng');
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('selectedLanguage') as string;
+        if (storedLanguage) {
+            setLanguage(storedLanguage);
+        }
+    })
+
     const content = clientData[language]; // Get content based on selected language
     const [isImageLoaded, setIsImageLoaded] = React.useState(true);
 
     return (
-        <>
+        <Box>
             <Box
                 sx={{
                     display: 'flex',
@@ -69,7 +76,7 @@ const ClientsPage: React.FC = () => {
                     ))}
                 </Grid>
             </Container>
-        </>
+        </Box>
     );
 };
 

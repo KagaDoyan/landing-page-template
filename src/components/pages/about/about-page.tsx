@@ -1,16 +1,23 @@
 // AboutPage.tsx
 "use client";
-import React from 'react';
-import { AboutData } from '@/about-data';
+import React, { useEffect, useState } from 'react';
+import { AboutData } from '@/components/about-data';
 import { Box, Typography, List, ListItem, Container } from '@mui/material';
 
 const AboutPage: React.FC = () => {
-    const language = localStorage.getItem('selectedLanguage') || 'eng';
+
+    const [language, setLanguage] = useState<string>('eng');
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('selectedLanguage') as string;
+        if (storedLanguage) {
+            setLanguage(storedLanguage);
+        }
+    })
+
     const content = AboutData[language];
     const [isImageLoaded, setIsImageLoaded] = React.useState(true);
-
     return (
-        <>
+        <Box>
             <Box
                 sx={{
                     display: 'flex',
@@ -48,7 +55,7 @@ const AboutPage: React.FC = () => {
                     <Typography sx={{ paddingBottom: 2, color: 'orange', fontSize: { xs: '2rem', sm: '2.5rem', md: '2.5rem' } }} gutterBottom>
                         {content.title}
                     </Typography>
-                    <Typography variant="body1" paragraph sx={{fontSize: { xs: '1rem', sm: '1.5rem', md: '1.5rem' }}}>
+                    <Typography variant="body1" paragraph sx={{ fontSize: { xs: '1rem', sm: '1.5rem', md: '1.5rem' } }}>
                         {content.description}
                     </Typography>
                 </Box>
@@ -57,7 +64,7 @@ const AboutPage: React.FC = () => {
                     <Typography sx={{ paddingBottom: 2, color: 'orange', fontSize: { xs: '2rem', sm: '2.5rem', md: '2.5rem' } }} gutterBottom>
                         {content.mission.title}
                     </Typography>
-                    <Typography variant="body1" paragraph sx={{fontSize: { xs: '1rem', sm: '1.5rem', md: '1.5rem' }}}>
+                    <Typography variant="body1" paragraph sx={{ fontSize: { xs: '1rem', sm: '1.5rem', md: '1.5rem' } }}>
                         {content.mission.description}
                     </Typography>
                 </Box>
@@ -66,12 +73,12 @@ const AboutPage: React.FC = () => {
                     <Typography sx={{ paddingBottom: 2, color: 'orange', fontSize: { xs: '2rem', sm: '2.5rem', md: '2.5rem' } }} gutterBottom>
                         {content.vision.title}
                     </Typography>
-                    <Typography variant="body1" paragraph sx={{fontSize: { xs: '1rem', sm: '1.5rem', md: '1.5rem' }}}>
+                    <Typography variant="body1" paragraph sx={{ fontSize: { xs: '1rem', sm: '1.5rem', md: '1.5rem' } }}>
                         {content.vision.description}
                     </Typography>
                 </Box>
             </Container>
-        </>
+        </Box>
     );
 };
 

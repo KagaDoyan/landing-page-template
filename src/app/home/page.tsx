@@ -1,9 +1,9 @@
-import HomePage from "@/components/home/home-page";
+import HomePage from "@/components/pages/home/home-page";
 
-export default function Home() {
+export default function Page(): React.JSX.Element {
   return (
-    <>
+    <div>
       <HomePage/>
-    </>
+    </div>
   );
 }

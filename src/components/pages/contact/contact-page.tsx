@@ -1,12 +1,18 @@
 // app/contact/page.tsx
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Grid, Link } from '@mui/material';
 import { Phone, Email, LocationOn, Chat } from '@mui/icons-material';
-import contactData from '@/contact-data';
+import contactData from '@/components/contact-data';
 
 const ContactPage: React.FC = () => {
-    const language = localStorage.getItem("selectedLanguage") || "eng";
+    const [language, setLanguage] = useState<string>('eng');
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('selectedLanguage') as string;
+        if (storedLanguage) {
+            setLanguage(storedLanguage);
+        }
+    })
     const data = contactData[language];
 
     const location = "17.405914,102.800196";
@@ -14,7 +20,7 @@ const ContactPage: React.FC = () => {
 
     const [isImageLoaded, setIsImageLoaded] = React.useState(true);
     return (
-        <>
+        <Box>
             <Box
                 sx={{
                     display: 'flex',
@@ -102,7 +108,7 @@ const ContactPage: React.FC = () => {
                     </Grid>
                 </Grid>
             </Container >
-        </>
+        </Box>
     );
 };
 

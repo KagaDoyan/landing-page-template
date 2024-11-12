@@ -1,14 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Container, Grid, Divider, Link, IconButton } from "@mui/material";
 import { FaFacebook, FaLine } from "react-icons/fa"; // Import the Facebook and Line icons from react-icons
 
-import { FooterData } from '@/footer-data'; // Import the footer data
+import { FooterData } from '@/components/footer-data'; // Import the footer data
 
 const Footer: React.FC = () => {
-    const language = localStorage.getItem('selectedLanguage') || 'eng';
+    const [language,setlanguage] = useState<string>('eng');
     const footerContent = FooterData[language]; // Get content based on selected language
 
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('selectedLanguage');
+        if (storedLanguage) {
+            setlanguage(storedLanguage);
+        }
+    })
     return (
         <Box
             sx={{
